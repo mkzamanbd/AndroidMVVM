@@ -1,7 +1,9 @@
 package com.example.androidmvvm.ui.auth
 
 import android.view.View
+import android.widget.EditText
 import androidx.lifecycle.ViewModel
+import com.example.androidmvvm.R
 import com.example.androidmvvm.data.repository.UserRepository
 
 class AuthViewModel : ViewModel() {

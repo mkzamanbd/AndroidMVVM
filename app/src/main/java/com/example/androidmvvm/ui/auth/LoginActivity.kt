@@ -2,14 +2,15 @@ package com.example.androidmvvm.ui.auth
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.ProgressBar
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.androidmvvm.R
 import com.example.androidmvvm.databinding.ActivityLoginBinding
+import com.example.androidmvvm.utils.hide
+import com.example.androidmvvm.utils.show
 import com.example.androidmvvm.utils.toast
 
 
@@ -21,7 +22,7 @@ class LoginActivity : AppCompatActivity(), AuthListener {
         super.onCreate(savedInstanceState)
         val binding: ActivityLoginBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_login)
-        val viewModel = ViewModelProviders.of(this).get(AuthViewModel::class.java)
+        val viewModel = ViewModelProvider(this).get(AuthViewModel::class.java)
 
         binding.login = viewModel
 
@@ -31,18 +32,18 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     }
 
     override fun onStarted() {
-        progressBar.visibility = View.VISIBLE
+        progressBar.show()
     }
 
     override fun onSuccess(loginResponse: LiveData<String>) {
         loginResponse.observe(this, Observer {
             toast(it)
-            progressBar.visibility = View.GONE
+            progressBar.hide()
         })
     }
 
     override fun onFailure(message: String) {
         toast(message)
-        progressBar.visibility = View.GONE
+        progressBar.hide()
     }
 }

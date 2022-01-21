@@ -8,6 +8,7 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import org.json.JSONObject
 
 class UserRepository {
 
@@ -21,9 +22,11 @@ class UserRepository {
                     response: Response<ResponseBody>,
                 ) {
                     if (response.isSuccessful) {
-                        loginResponse.value = response.body()!!.string()
+                        val jsonSuccessObject = JSONObject(response.body()!!.string())
+                        loginResponse.value = jsonSuccessObject.toString()
                     } else {
-                        loginResponse.value = response.errorBody()?.toString()
+                        val jsonErrorObject = JSONObject(response.errorBody()!!.string())
+                        loginResponse.value = jsonErrorObject.toString()
                     }
                 }
 

@@ -2,6 +2,8 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
+//kotlin kapt and navigation safeargs plugin
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdk 31
@@ -56,9 +58,26 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.3'
 
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'//mvvm, live data
-    //noinspection LifecycleAnnotationProcessorWithJava8
-    annotationProcessor "androidx.lifecycle:lifecycle-compiler:2.4.0"//live data
 
     //noinspection GradleDependency
     implementation "com.github.bumptech.glide:glide:4.8.0"
+
+    //Kodein Dependency Injection
+    implementation "org.kodein.di:kodein-di-generic-jvm:6.2.1"
+    implementation "org.kodein.di:kodein-di-framework-android-x:6.2.1"
+
+    //Android Room
+    implementation "androidx.room:room-runtime:2.4.1"
+    implementation "androidx.room:room-ktx:2.4.1"
+    kapt "androidx.room:room-compiler:2.4.1"
+
+    //Android Navigation Architecture
+    implementation "androidx.navigation:navigation-fragment-ktx:2.3.5"
+    implementation "androidx.navigation:navigation-ui-ktx:2.3.5"
+
+    implementation 'com.xwray:groupie:2.3.0'
+    implementation 'com.xwray:groupie-kotlin-android-extensions:2.3.0'
+    implementation 'com.xwray:groupie-databinding:2.3.0'
+
+    implementation "androidx.preference:preference-ktx:1.1.1"
 }
