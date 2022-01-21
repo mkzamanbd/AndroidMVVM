@@ -22,11 +22,11 @@ class UserRepository {
                     response: Response<ResponseBody>,
                 ) {
                     if (response.isSuccessful) {
-                        val jsonSuccessObject = JSONObject(response.body()!!.string())
-                        loginResponse.value = jsonSuccessObject.toString()
+                        // val jsonSuccessObject = JSONObject(response.body()!!.string())
+                        loginResponse.value = response.body()?.string()
                     } else {
-                        val jsonErrorObject = JSONObject(response.errorBody()!!.string())
-                        loginResponse.value = jsonErrorObject.toString()
+                        // val jsonErrorObject = JSONObject(response.errorBody()!!.string())
+                        loginResponse.value = response.errorBody()?.string()
                     }
                 }
 

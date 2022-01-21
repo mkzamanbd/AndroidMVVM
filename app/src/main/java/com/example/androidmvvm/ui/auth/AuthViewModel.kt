@@ -8,8 +8,8 @@ import com.example.androidmvvm.data.repository.UserRepository
 
 class AuthViewModel : ViewModel() {
 
-    var email: String? = null
-    var password: String? = null
+    var email: String? = "zaman7u@gmail.com"
+    var password: String? = "password"
 
     var authListener: AuthListener? = null
 
