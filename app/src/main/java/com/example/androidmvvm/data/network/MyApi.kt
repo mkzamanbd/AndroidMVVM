@@ -13,14 +13,14 @@ interface MyApi {
     @FormUrlEncoded
     @POST("auth/login")
     fun userLogin(
-        @Field("email") email: String,
+        @Field("username") email: String,
         @Field("password") password: String,
     ): Call<ResponseBody>
 
     companion object {
         operator fun invoke(): MyApi {
             return Retrofit.Builder()
-                .baseUrl("http://api.kzaman.me/api/")
+                .baseUrl("http://jerpapi.mononsoft.org:8889/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi::class.java)
