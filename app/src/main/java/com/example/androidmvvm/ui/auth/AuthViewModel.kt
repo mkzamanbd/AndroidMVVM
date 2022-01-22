@@ -1,10 +1,10 @@
 package com.example.androidmvvm.ui.auth
 
 import android.view.View
-import android.widget.EditText
 import androidx.lifecycle.ViewModel
 import com.example.androidmvvm.R
 import com.example.androidmvvm.data.repository.UserRepository
+import com.example.androidmvvm.utils.Coroutines
 
 class AuthViewModel : ViewModel() {
 
@@ -20,8 +20,11 @@ class AuthViewModel : ViewModel() {
             authListener?.onFailure("Invalid email or password")
             return
         }
-        val loginResponse = UserRepository().userLogin(email!!, password!!)
-
-        authListener?.onSuccess(loginResponse)
+        Coroutines.main {
+            val response = UserRepository().userLogin(email!!, password!!)
+            if(response.isSuccessful){
+                authListener?.onSuccess(response.body()?.user!!)
+            }
+        }
     }
 }

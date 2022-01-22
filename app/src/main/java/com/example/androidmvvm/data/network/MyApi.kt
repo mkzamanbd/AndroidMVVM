@@ -1,11 +1,13 @@
 package com.example.androidmvvm.data.network
 
 import com.example.androidmvvm.BuildConfig
+import com.example.androidmvvm.data.response.AuthResponse
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Field
@@ -16,10 +18,10 @@ interface MyApi {
 
     @FormUrlEncoded
     @POST("auth/login")
-    fun userLogin(
+    suspend fun userLogin(
         @Field("email") email: String,
         @Field("password") password: String,
-    ): Call<ResponseBody>
+    ): Response<AuthResponse>
 
     companion object {
         operator fun invoke(): MyApi {
