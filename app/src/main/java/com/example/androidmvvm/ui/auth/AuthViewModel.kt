@@ -4,14 +4,19 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.example.androidmvvm.R
 import com.example.androidmvvm.data.repository.UserRepository
+import com.example.androidmvvm.utils.ApiException
 import com.example.androidmvvm.utils.Coroutines
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(
+    private val repository: UserRepository
+) : ViewModel() {
 
     var email: String? = "zaman7u@gmail.com"
     var password: String? = "password"
 
     var authListener: AuthListener? = null
+
+    fun getLoggedInUser() = repository.getUser()
 
 
     fun onLoginButtonClick(view: View) {
@@ -21,10 +26,17 @@ class AuthViewModel : ViewModel() {
             return
         }
         Coroutines.main {
-            val response = UserRepository().userLogin(email!!, password!!)
-            if(response.isSuccessful){
-                authListener?.onSuccess(response.body()?.user!!)
+            try {
+                val authResponse = repository.userLogin(email!!, password!!)
+                authResponse.user.let {
+                    authListener?.onSuccess(it)
+                    repository.saveUser(it)
+                    return@main
+                }
+            } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
             }
+
         }
     }
 }
