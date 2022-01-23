@@ -4,9 +4,7 @@ import com.example.androidmvvm.BuildConfig
 import com.example.androidmvvm.data.response.AuthResponse
 import okhttp3.Authenticator
 import okhttp3.OkHttpClient
-import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,7 +12,7 @@ import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
-interface MyApi {
+interface RetrofitClient {
 
     @FormUrlEncoded
     @POST("auth/login")
@@ -24,13 +22,26 @@ interface MyApi {
     ): Response<AuthResponse>
 
     companion object {
-        operator fun invoke(): MyApi {
+        operator fun invoke(
+            networkConnectionInterceptor: NetworkConnectionInterceptor
+        ): RetrofitClient {
+
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .also { client ->
+                    if (BuildConfig.DEBUG) {
+                        val logging = HttpLoggingInterceptor()
+                        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+                        client.addInterceptor(logging)
+                    }
+                }.build()
+
             return Retrofit.Builder()
                 .baseUrl("https://api.kzaman.me/api/")
                 .addConverterFactory(GsonConverterFactory.create())
-                .client(getRetrofitClient())
+                .client(okHttpClient)
                 .build()
-                .create(MyApi::class.java)
+                .create(RetrofitClient::class.java)
         }
 
         private fun getRetrofitClient(authenticator: Authenticator? = null): OkHttpClient {

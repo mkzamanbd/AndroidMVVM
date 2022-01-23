@@ -7,13 +7,13 @@ import android.view.View
 import android.widget.ProgressBar
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.androidmvvm.R
 import com.example.androidmvvm.data.database.AppDatabase
 import com.example.androidmvvm.data.database.entities.User
-import com.example.androidmvvm.data.network.MyApi
+import com.example.androidmvvm.data.network.RetrofitClient
+import com.example.androidmvvm.data.network.NetworkConnectionInterceptor
 import com.example.androidmvvm.data.repository.UserRepository
 import com.example.androidmvvm.databinding.ActivityLoginBinding
 import com.example.androidmvvm.ui.MainActivity
@@ -30,7 +30,9 @@ class LoginActivity : AppCompatActivity(), AuthListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val api = MyApi()
+        val networkConnectionInterceptor = NetworkConnectionInterceptor(this)
+
+        val api = RetrofitClient(networkConnectionInterceptor)
         val database = AppDatabase(this)
         val repository = UserRepository(api, database)
         val factory = AuthViewModelFactory(repository)

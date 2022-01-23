@@ -3,12 +3,12 @@ package com.example.androidmvvm.data.repository
 
 import com.example.androidmvvm.data.database.AppDatabase
 import com.example.androidmvvm.data.database.entities.User
-import com.example.androidmvvm.data.network.MyApi
+import com.example.androidmvvm.data.network.RetrofitClient
 import com.example.androidmvvm.data.network.SafeApiRequest
 import com.example.androidmvvm.data.response.AuthResponse
 
 class UserRepository(
-    private val api: MyApi,
+    private val api: RetrofitClient,
     private val database: AppDatabase,
 ) : SafeApiRequest() {
 

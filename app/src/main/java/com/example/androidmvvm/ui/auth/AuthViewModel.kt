@@ -6,6 +6,7 @@ import com.example.androidmvvm.R
 import com.example.androidmvvm.data.repository.UserRepository
 import com.example.androidmvvm.utils.ApiException
 import com.example.androidmvvm.utils.Coroutines
+import com.example.androidmvvm.utils.NoInternetException
 
 class AuthViewModel(
     private val repository: UserRepository
@@ -34,6 +35,8 @@ class AuthViewModel(
                     return@main
                 }
             } catch (e: ApiException) {
+                authListener?.onFailure(e.message!!)
+            }catch (e: NoInternetException){
                 authListener?.onFailure(e.message!!)
             }
 
