@@ -21,9 +21,16 @@ interface RetrofitClient {
         @Field("password") password: String,
     ): Response<AuthResponse>
 
+    suspend fun register(
+        @Field("name") name: String,
+        @Field("email") email: String,
+        @Field("password") password: String,
+        @Field("password_confirmation") password_confirmation: String,
+    ): Response<AuthResponse>
+
     companion object {
         operator fun invoke(
-            networkConnectionInterceptor: NetworkConnectionInterceptor
+            networkConnectionInterceptor: NetworkConnectionInterceptor,
         ): RetrofitClient {
 
             val okHttpClient = OkHttpClient.Builder()

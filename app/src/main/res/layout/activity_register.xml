@@ -16,7 +16,7 @@
         android:background="@drawable/ic_login_screen_background"
         android:orientation="vertical"
         android:padding="40dp"
-        tools:context=".ui.auth.LoginActivity">
+        tools:context=".ui.auth.RegisterActivity">
 
 
         <TextView
@@ -25,7 +25,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="@string/sign_in"
+            android:text="@string/register"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,9 +52,22 @@
             tools:ignore="MissingConstraints">
 
             <EditText
+                android:id="@+id/nameInputField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_field"
+                android:drawableStart="@drawable/ic_baseline_people_24"
+                android:drawableLeft="@drawable/ic_baseline_people_24"
+                android:drawablePadding="10dp"
+                android:hint="@string/name"
+                android:padding="15dp"
+                android:text="@={authViewModel.name}" />
+
+            <EditText
                 android:id="@+id/emailInputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
                 android:autofillHints="Email"
                 android:background="@drawable/bg_input_field"
                 android:drawableStart="@drawable/ic_baseline_email_24"
@@ -81,60 +94,31 @@
                 android:padding="15dp"
                 android:text="@={authViewModel.password}" />
 
-            <LinearLayout
+            <EditText
+                android:id="@+id/passwordConfirmation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/ten"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatCheckBox
-                    android:id="@+id/cb_remember_me"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|start"
-                    android:padding="@dimen/five"
-                    android:text="@string/remember_me"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_forgot_password"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:gravity="center_vertical|end"
-                    android:padding="@dimen/five"
-                    android:text="@string/forgot_password"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvErrorMessage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/ten"
-                android:gravity="center_vertical|start"
-                android:maxLines="2"
-                android:padding="@dimen/five"
-                android:text="@string/authenticationFailed"
-                android:textColor="@color/red"
-                android:textSize="@dimen/ten"
-                android:visibility="gone" />
+                android:layout_marginTop="10dp"
+                android:autofillHints="Password"
+                android:background="@drawable/bg_input_field"
+                android:drawableStart="@drawable/ic_baseline_lock_24"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
+                android:drawablePadding="10dp"
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:padding="15dp"
+                android:text="@={authViewModel.passwordConfirmation}" />
 
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/loginButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten"
                 android:background="@drawable/login_button"
                 android:gravity="center"
-                android:onClick="@{authViewModel::onLoginButtonClick}"
-                android:text="@string/login"
+                android:onClick="@{authViewModel::onRegisterButtonClick}"
+                android:text="@string/register"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse"
                 android:textColor="@color/white"
                 android:textSize="14sp"
@@ -158,8 +142,8 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{authViewModel::onRegister}"
-            android:text="Create account"
+            android:onClick="@{authViewModel::onLogin}"
+            android:text="Sign in instead"
             android:textColor="@color/colorPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

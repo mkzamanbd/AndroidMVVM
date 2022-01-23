@@ -31,6 +31,7 @@
     <string name="kamruzzaman">Kamruzzaman</string>
     <string name="zaman7u_gmail_com">zaman7u@gmail.com</string>
     <string name="authenticationFailed">User Authentication Failed. Please try again.</string>
+
     <string name="forgot_password">Forgot Password</string>
     <string name="remember_me">Remember Me</string>
 </resources>
