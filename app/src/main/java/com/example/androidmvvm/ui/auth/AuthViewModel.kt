@@ -2,9 +2,7 @@ package com.example.androidmvvm.ui.auth
 
 import android.content.Intent
 import android.view.View
-import android.widget.Toast
 import androidx.lifecycle.ViewModel
-import com.example.androidmvvm.R
 import com.example.androidmvvm.data.repository.UserRepository
 import com.example.androidmvvm.utils.ApiException
 import com.example.androidmvvm.utils.Coroutines
@@ -23,7 +21,6 @@ class AuthViewModel(
     fun getLoggedInUser() = repository.getUser()
 
     fun onLogin(view: View) {
-        Toast.makeText(view.context, "Clicked", Toast.LENGTH_SHORT).show()
         Intent(view.context, LoginActivity::class.java).also {
             view.context.startActivity(it)
         }
@@ -83,7 +80,6 @@ class AuthViewModel(
                     repository.userRegister(name!!, email!!, password!!, passwordConfirmation!!)
                 authResponse.user.let {
                     authListener?.onSuccess(it)
-                    repository.saveUser(it)
                     return@main
                 }
             } catch (e: ApiException) {

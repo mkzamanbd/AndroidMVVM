@@ -55,6 +55,7 @@
                 android:id="@+id/nameInputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:background="@drawable/bg_input_field"
                 android:drawableStart="@drawable/ic_baseline_people_24"
                 android:drawableLeft="@drawable/ic_baseline_people_24"

@@ -20,7 +20,8 @@ interface RetrofitClient {
         @Field("email") email: String,
         @Field("password") password: String,
     ): Response<AuthResponse>
-
+    @FormUrlEncoded
+    @POST("auth/register")
     suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
