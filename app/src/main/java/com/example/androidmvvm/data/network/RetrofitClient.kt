@@ -2,9 +2,7 @@ package com.example.androidmvvm.data.network
 
 import com.example.androidmvvm.BuildConfig
 import com.example.androidmvvm.data.response.AuthResponse
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import okhttp3.Authenticator
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response

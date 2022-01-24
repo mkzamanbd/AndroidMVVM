@@ -12,7 +12,7 @@ class UserRepository(
     private val database: AppDatabase,
 ) : SafeApiRequest() {
 
-    suspend fun userLogin(email: String, password: String): AuthResponse {
+    suspend fun login(email: String, password: String): AuthResponse {
         return apiRequest { api.userLogin(email, password) }
     }
 

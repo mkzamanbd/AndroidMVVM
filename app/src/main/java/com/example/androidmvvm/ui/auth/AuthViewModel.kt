@@ -40,7 +40,7 @@ class AuthViewModel(
         }
         Coroutines.main {
             try {
-                val authResponse = repository.userLogin(email!!, password!!)
+                val authResponse = repository.login(email!!, password!!)
                 authResponse.user.let {
                     authListener?.onSuccess(it)
                     repository.saveUser(it)
